@@ -1,0 +1,27 @@
+{
+  "name": "csgo-dem2text",
+  "version": "1.0.0",
+  "description": "Parse a CSGO demo to text",
+  "main": "./src/index.js",
+  "repository": "https://github.com/@TODO",
+  "dependencies": {
+    "demofile": "^1.4.0",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@types/bytebuffer": "^5.0.41",
+    "@types/lodash": "^4.14.155",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-node": "^11.1.0"
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "parse": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
