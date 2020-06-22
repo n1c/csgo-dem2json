@@ -27,11 +27,13 @@ export class EventFactory {
     }};
   }
 
+  /* @UNUSED
   public static BombBeep(d: DemoFile, e: any): events.BombBeep {
     return {...EventFactory.Event("bomb_beep", d), ...{
       entindex: e.entindex,
     }};
   }
+  */
 
   public static BombBeginDefuse(d: DemoFile, e: any): events.BombBeginDefuse {
     return {...EventFactory.Event("bomb_begindefuse", d), ...{
