@@ -24,9 +24,24 @@ if (process.argv.length < 3) {
 const demoPath: string = process.argv[2];
 const outputPath: string = process.argv.length === 4 ? process.argv[3] : process.argv[2].replace(".dem", ".json");
 
+const demo = new demofile.DemoFile();
+
+console.time("parseDemo");
+fs.readFile(demoPath, (err: NodeJS.ErrnoException | null, buffer: Buffer) => {
+  if (err) {
+    throw err;
+  }
+
+  log(`Processing ${demoPath} to ${outputPath}`);
+  demo.parse(buffer);
+});
+
 // Keeps track of players and when they become unblind (resets between rounds)
 let playersUnblindAt: { [userid: number]: number } = {};
+
+// Tracks active grenades for users (resets between rounds)
 let grenades: { [userid: number]: { [weaponType: string]: i.Player[] } } = {};
+
 let tickFlashbangDetonate: events.FlashbangDetonate | undefined;
 let tickPlayersBlind: events.PlayerBlind[] = [];
 
@@ -35,7 +50,6 @@ let tickPlayersHEHurt: events.PlayerHurt[] = [];
 
 let demoDump: i.DemoDump;
 
-const demo = new demofile.DemoFile();
 demo.on("start", () => {
   demoDump = {
     client_name: demo.header.clientName,
@@ -56,6 +70,7 @@ demo.on("start", () => {
   };
 });
 
+// Top level demo events
 demo.on("end", () => {
   console.timeEnd("parseDemo");
 
@@ -89,6 +104,8 @@ demo.on("tickend", () => {
   tickHEGrenadeDetonate = undefined;
   tickPlayersHEHurt = [];
 });
+
+// userMessages
 
 demo.userMessages.on("SayText", (e: any) => {
   demoDump.events.push(EventFactory.SayText(demo, e));
@@ -367,14 +384,3 @@ demo.gameEvents.on("smokegrenade_detonate", (e: any) => {
 demo.gameEvents.on("smokegrenade_expired", (e: any) => {
   demoDump.events.push(EventFactory.SmokegrenadeExpired(demo, e));
 });
-
-fs.readFile(demoPath, (err: NodeJS.ErrnoException | null, buffer: Buffer) => {
-  if (err) {
-    throw err;
-  }
-
-  log(`Processing ${demoPath} to ${outputPath}`);
-  demo.parse(buffer);
-});
-
-console.time("parseDemo");
