@@ -1,27 +1,27 @@
 {
-  "name": "csgo-dem2text",
-  "version": "1.0.0",
-  "description": "Parse a CSGO demo to text",
+  "name": "csgo-dem2json",
+  "author": "Nic Malan",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "Parse a CSGO demo to JSON file of events",
   "main": "./src/index.js",
-  "repository": "https://github.com/@TODO",
-  "dependencies": {
-    "demofile": "^1.4.0",
-    "typescript": "^3.9.5"
-  },
-  "devDependencies": {
-    "@types/bytebuffer": "^5.0.41",
-    "@types/lodash": "^4.14.155",
-    "@types/node": "^14.0.13",
-    "@typescript-eslint/eslint-plugin": "^3.3.0",
-    "@typescript-eslint/parser": "^3.3.0",
-    "eslint": "^7.2.0",
-    "eslint-plugin-node": "^11.1.0"
-  },
+  "repository": "https://github.com/n1c/csgo-dem2json",
   "scripts": {
     "compile": "tsc -p .",
     "parse": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "demofile": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/bytebuffer": "^5.0.41",
+    "@types/lodash": "^4.14.156",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "eslint": "^7.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "typescript": "^3.9.5"
+  }
 }
