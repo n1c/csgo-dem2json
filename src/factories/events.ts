@@ -1,12 +1,12 @@
 
-import { DemoFile } from "demofile";
+import * as d from "demofile";
 import { Factory } from "../factories/index";
 import * as i from "../interfaces";
 import * as events from "../interfaces/events";
 
 export class EventFactory {
 
-  public static Event(type: string, d: DemoFile): events.Event {
+  public static Event(type: string, d: d.DemoFile): events.Event {
     return {
       tick: d.currentTick,
       time: d.currentTime,
@@ -14,28 +14,20 @@ export class EventFactory {
     };
   }
 
-  public static SayText(d: DemoFile, e: any): events.SayText {
+  public static SayText(d: d.DemoFile, e: any): events.SayText {
     return {...EventFactory.Event("say_text", d), ...{
       text: e.text,
     }};
   }
 
-  public static SayText2(d: DemoFile, e: any): events.SayText2 {
+  public static SayText2(d: d.DemoFile, e: any): events.SayText2 {
     return {...EventFactory.Event("say_text2", d), ...{
       text: e.params[1],
       username: e.params[0],
     }};
   }
 
-  /* @UNUSED
-  public static BombBeep(d: DemoFile, e: any): events.BombBeep {
-    return {...EventFactory.Event("bomb_beep", d), ...{
-      entindex: e.entindex,
-    }};
-  }
-  */
-
-  public static BombBeginDefuse(d: DemoFile, e: any): events.BombBeginDefuse {
+  public static BombBeginDefuse(d: d.DemoFile, e: d.IEventBombBegindefuse): events.BombBeginDefuse {
     return {...EventFactory.Event("bomb_begindefuse", d), ...{
       haskit: e.haskit,
       player: Factory.playerFromUserID(d, e.userid),
@@ -43,7 +35,7 @@ export class EventFactory {
     }};
   }
 
-  public static BombBeginPlant(d: DemoFile, e: any): events.BombBeginPlant {
+  public static BombBeginPlant(d: d.DemoFile, e: d.IEventBombBeginplant): events.BombBeginPlant {
     return {...EventFactory.Event("bomb_beginplant", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       site: e.site,
@@ -51,7 +43,7 @@ export class EventFactory {
     }};
   }
 
-  public static BombDefused(d: DemoFile, e: any): events.BombDefused {
+  public static BombDefused(d: d.DemoFile, e: d.IEventBombDefused): events.BombDefused {
     return {...EventFactory.Event("bomb_defused", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       site: e.site,
@@ -59,7 +51,7 @@ export class EventFactory {
     }};
   }
 
-  public static BombDropped(d: DemoFile, e: any): events.BombDropped {
+  public static BombDropped(d: d.DemoFile, e: d.IEventBombDropped): events.BombDropped {
     return {...EventFactory.Event("bomb_dropped", d), ...{
       entindex: e.entindex,
       player: Factory.playerFromUserID(d, e.userid),
@@ -67,21 +59,21 @@ export class EventFactory {
     }};
   }
 
-  public static BombExploded(d: DemoFile, e: any): events.BombExploded {
+  public static BombExploded(d: d.DemoFile, e: d.IEventBombExploded): events.BombExploded {
     return {...EventFactory.Event("bomb_exploded", d), ...{
       site: e.site,
       userid: e.userid,
     }};
   }
 
-  public static BombPickup(d: DemoFile, e: any): events.BombPickup {
+  public static BombPickup(d: d.DemoFile, e: d.IEventBombPickup): events.BombPickup {
     return {...EventFactory.Event("bomb_pickup", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       userid: e.userid,
     }};
   }
 
-  public static BombPlanted(d: DemoFile, e: any): events.BombPlanted {
+  public static BombPlanted(d: d.DemoFile, e: d.IEventBombPlanted): events.BombPlanted {
     return {...EventFactory.Event("bomb_planted", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       site: e.site,
@@ -89,7 +81,7 @@ export class EventFactory {
     }};
   }
 
-  public static CSWinPanelRound(d: DemoFile, e: any): events.CSWinPanelRound {
+  public static CSWinPanelRound(d: d.DemoFile, e: d.IEventCsWinPanelRound): events.CSWinPanelRound {
     return {...EventFactory.Event("cs_win_panel_round", d), ...{
       final_event: e.final_event,
       funfact_data1: e.funfact_data1,
@@ -103,7 +95,11 @@ export class EventFactory {
     }};
   }
 
-  public static FlashbangDetonate(d: DemoFile, e: any, playerAtThrow: i.Player | undefined): events.FlashbangDetonate {
+  public static FlashbangDetonate(
+    d: d.DemoFile,
+    e: d.IEventFlashbangDetonate,
+    playerAtThrow: i.Player | undefined
+  ): events.FlashbangDetonate {
     return {...EventFactory.Event("flashbang_detonate", d), ...{
       entityid: e.entityid,
       player: Factory.playerFromUserID(d, e.userid),
@@ -114,7 +110,11 @@ export class EventFactory {
     }};
   }
 
-  public static HEGrenadeDetonate(d: DemoFile, e: any, playerAtThrow: i.Player | undefined): events.HEGrenadeDetonate {
+  public static HEGrenadeDetonate(
+    d: d.DemoFile,
+    e: d.IEventHegrenadeDetonate,
+    playerAtThrow: i.Player | undefined
+  ): events.HEGrenadeDetonate {
     return {...EventFactory.Event("hegrenade_detonate", d), ...{
       entityid: e.entityid,
       player: Factory.playerFromUserID(d, e.userid),
@@ -125,7 +125,7 @@ export class EventFactory {
     }};
   }
 
-  public static HLTVChase(d: DemoFile, e: any): events.HLTVChase {
+  public static HLTVChase(d: d.DemoFile, e: d.IEventHltvChase): events.HLTVChase {
     return {...EventFactory.Event("hltv_chase", d), ...{
       distance: e.distance,
       inertia: e.inertia,
@@ -137,7 +137,7 @@ export class EventFactory {
     }};
   }
 
-  public static HLTVStatus(d: DemoFile, e: any): events.HLTVStatus {
+  public static HLTVStatus(d: d.DemoFile, e: d.IEventHltvStatus): events.HLTVStatus {
     return {...EventFactory.Event("hltv_status", d), ...{
       clients: e.clients,
       externallinked: e.externallinked,
@@ -148,17 +148,18 @@ export class EventFactory {
     }};
   }
 
-  public static InfernoExpire(d: DemoFile, e: any): events.InfernoExpire {
+  public static InfernoExpire(d: d.DemoFile, e: d.IEventInfernoExpire): events.InfernoExpire {
     return {...EventFactory.Event("inferno_expire", d), ...{
       entityid: e.entityid,
       position: Factory.Position(e),
     }};
   }
 
-  public static InfernoStartburn(d: DemoFile, e: any): events.InfernoStartburn {
+  public static InfernoStartburn(d: d.DemoFile, e: d.IEventInfernoStartburn): events.InfernoStartburn {
     let player;
     const entity = d.entities.entities[e.entityid] || null;
     if (entity) {
+      // @ts-ignore
       player = Factory.Player(entity.owner);
     }
 
@@ -169,7 +170,7 @@ export class EventFactory {
     }};
   }
 
-  public static ItemEquip(d: DemoFile, e: any): events.ItemEquip {
+  public static ItemEquip(d: d.DemoFile, e: d.IEventItemEquip): events.ItemEquip {
     return {...EventFactory.Event("item_equip", d), ...{
       canzoom: e.canzoom,
       defindex: e.defindex,
@@ -184,7 +185,7 @@ export class EventFactory {
     }};
   }
 
-  public static ItemPickup(d: DemoFile, e: any): events.ItemPickup {
+  public static ItemPickup(d: d.DemoFile, e: d.IEventItemPickup): events.ItemPickup {
     return {...EventFactory.Event("item_pickup", d), ...{
       defindex: e.defindex,
       item: e.item,
@@ -194,7 +195,7 @@ export class EventFactory {
     }};
   }
 
-  public static ItemRemove(d: DemoFile, e: any): events.ItemRemove {
+  public static ItemRemove(d: d.DemoFile, e: d.IEventItemRemove): events.ItemRemove {
     return {...EventFactory.Event("item_remove", d), ...{
       defindex: e.defindex,
       item: e.item,
@@ -203,7 +204,7 @@ export class EventFactory {
     }};
   }
 
-  public static OtherDeath(d: DemoFile, e: any): events.OtherDeath {
+  public static OtherDeath(d: d.DemoFile, e: d.IEventOtherDeath): events.OtherDeath {
     return {...EventFactory.Event("other_death", d), ...{
       attacker: e.attacker,
       headshot: e.headshot,
@@ -218,7 +219,7 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerBlind(d: DemoFile, e: any): events.PlayerBlind {
+  public static PlayerBlind(d: d.DemoFile, e: d.IEventPlayerBlind): events.PlayerBlind {
     let attackerPlayer;
     if (e.attacker) {
       attackerPlayer = Factory.playerFromUserID(d, e.attacker);
@@ -234,7 +235,11 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerDeath(d: DemoFile, e: any, playersUnblindAt: { [userid: number]: number }): events.PlayerDeath {
+  public static PlayerDeath(
+    d: d.DemoFile,
+    e: d.IEventPlayerDeath,
+    playersUnblindAt: { [userid: number]: number }
+  ): events.PlayerDeath {
     let assisterPlayer;
     if (e.assister && e.assister > 0) {
       assisterPlayer = Factory.playerFromUserID(d, e.assister);
@@ -269,7 +274,7 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerDisconnect(d: DemoFile, e: any): events.PlayerDisconnect {
+  public static PlayerDisconnect(d: d.DemoFile, e: d.IEventPlayerDisconnect): events.PlayerDisconnect {
     return {...EventFactory.Event("player_disconnect", d), ...{
       name: e.name,
       networkid: e.networkid,
@@ -279,7 +284,7 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerFalldamage(d: DemoFile, e: any): events.PlayerFalldamage {
+  public static PlayerFalldamage(d: d.DemoFile, e: d.IEventPlayerFalldamage): events.PlayerFalldamage {
     return {...EventFactory.Event("player_falldamage", d), ...{
       damage: e.damage,
       player: Factory.playerFromUserID(d, e.userid),
@@ -287,14 +292,18 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerFootstep(d: DemoFile, e: any): events.PlayerFootstep {
+  public static PlayerFootstep(d: d.DemoFile, e: d.IEventPlayerFootstep): events.PlayerFootstep {
     return {...EventFactory.Event("player_footstep", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       userid: e.userid,
     }};
   }
 
-  public static PlayerHurt(d: DemoFile, e: any, playersUnblindAt: { [userid: number]: number }): events.PlayerHurt {
+  public static PlayerHurt(
+    d: d.DemoFile,
+    e: d.IEventPlayerHurt,
+    playersUnblindAt: { [userid: number]: number }
+  ): events.PlayerHurt {
     let attackerPlayer;
     let attackerSpottedPlayer = false;
     let playerSpottedAttacker = false;
@@ -330,14 +339,14 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerJump(d: DemoFile, e: any): events.PlayerJump {
+  public static PlayerJump(d: d.DemoFile, e: d.IEventPlayerJump): events.PlayerJump {
     return {...EventFactory.Event("player_jump", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       userid: e.userid,
     }};
   }
 
-  public static PlayerSpawn(d: DemoFile, e: any): events.PlayerSpawn {
+  public static PlayerSpawn(d: d.DemoFile, e: d.IEventPlayerSpawn): events.PlayerSpawn {
     return {...EventFactory.Event("player_spawn", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       teamnum: e.teamnum,
@@ -345,7 +354,7 @@ export class EventFactory {
     }};
   }
 
-  public static PlayerTeam(d: DemoFile, e: any): events.PlayerTeam {
+  public static PlayerTeam(d: d.DemoFile, e: d.IEventPlayerTeam): events.PlayerTeam {
     return {...EventFactory.Event("player_team", d), ...{
       autoteam: e.autoteam,
       disconnect: e.disconnect,
@@ -358,7 +367,7 @@ export class EventFactory {
     }};
   }
 
-  public static RoundEnd(d: DemoFile, e: any): events.RoundEnd {
+  public static RoundEnd(d: d.DemoFile, e: d.IEventRoundEnd): events.RoundEnd {
     return {...EventFactory.Event("round_end", d), ...{
       message: e.message,
       player_count: e.player_count,
@@ -369,21 +378,21 @@ export class EventFactory {
     }};
   }
 
-  public static RoundFreezeEnd(d: DemoFile): events.RoundFreezeEnd {
+  public static RoundFreezeEnd(d: d.DemoFile): events.RoundFreezeEnd {
     return {...EventFactory.Event("round_freeze_end", d), ...{
       players: Factory.PlayersListFull(d),
       round: Factory.RoundNumber(d),
     }};
   }
 
-  public static RoundOfficiallyEnded(d: DemoFile): events.RoundOfficiallyEnded {
+  public static RoundOfficiallyEnded(d: d.DemoFile): events.RoundOfficiallyEnded {
     return {...EventFactory.Event("round_officially_ended", d), ...{
       players: Factory.PlayersListFull(d),
       round: Factory.RoundNumber(d),
     }};
   }
 
-  public static RoundStart(d: DemoFile, e: any): events.RoundStart {
+  public static RoundStart(d: d.DemoFile, e: d.IEventRoundStart): events.RoundStart {
     return {...EventFactory.Event("round_start", d), ...{
       objective: e.objective,
       players: Factory.PlayersListFull(d),
@@ -392,7 +401,7 @@ export class EventFactory {
     }};
   }
 
-  public static RoundMVP(d: DemoFile, e: any): events.RoundMVP {
+  public static RoundMVP(d: d.DemoFile, e: d.IEventRoundMvp): events.RoundMVP {
     return {...EventFactory.Event("round_mvp", d), ...{
       musickitmvps: e.userid, // @TODO: Why is this userid?
       player: Factory.playerFromUserID(d, e.userid),
@@ -403,8 +412,8 @@ export class EventFactory {
   }
 
   public static SmokegrenadeDetonate(
-    d: DemoFile,
-    e: any,
+    d: d.DemoFile,
+    e: d.IEventSmokegrenadeDetonate,
     playerAtThrow: i.Player | undefined,
   ): events.SmokegrenadeDetonate {
     return {...EventFactory.Event("smokegrenade_detonate", d), ...{
@@ -416,7 +425,7 @@ export class EventFactory {
     }};
   }
 
-  public static SmokegrenadeExpired(d: DemoFile, e: any): events.SmokegrenadeExpired {
+  public static SmokegrenadeExpired(d: d.DemoFile, e: d.IEventSmokegrenadeExpired): events.SmokegrenadeExpired {
     return {...EventFactory.Event("smokegrenade_expired", d), ...{
       entityid: e.entityid,
       player: Factory.playerFromUserID(d, e.userid),
@@ -425,7 +434,7 @@ export class EventFactory {
     }};
   }
 
-  public static WeaponFire(d: DemoFile, e: any): events.WeaponFire {
+  public static WeaponFire(d: d.DemoFile, e: d.IEventWeaponFire): events.WeaponFire {
     return {...EventFactory.Event("weapon_fire", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       silenced: e.silenced,
@@ -434,14 +443,14 @@ export class EventFactory {
     }};
   }
 
-  public static WeaponReload(d: DemoFile, e: any): events.WeaponReload {
+  public static WeaponReload(d: d.DemoFile, e: d.IEventWeaponReload): events.WeaponReload {
     return {...EventFactory.Event("weapon_reload", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       userid: e.userid,
     }};
   }
 
-  public static WeaponZoom(d: DemoFile, e: any): events.WeaponZoom {
+  public static WeaponZoom(d: d.DemoFile, e: d.IEventWeaponZoom): events.WeaponZoom {
     return {...EventFactory.Event("weapon_zoom", d), ...{
       player: Factory.playerFromUserID(d, e.userid),
       userid: e.userid,

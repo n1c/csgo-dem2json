@@ -11,10 +11,6 @@ export interface BeginNewMatch extends Event {
   players: i.PlayersListShort;
 }
 
-export interface BombBeep extends Event {
-  entindex: number;
-}
-
 export interface BombBeginDefuse extends Event {
   userid: number;
   haskit: boolean;
@@ -295,8 +291,8 @@ export interface SmokegrenadeDetonate extends Event {
 }
 
 export interface SmokegrenadeExpired extends Event {
-  userid: 9;
-  entityid: 141;
+  userid: number;
+  entityid: number;
   player?: i.Player;
   position: i.Position;
 }

@@ -106,7 +106,6 @@ demo.on("tickend", () => {
 });
 
 // userMessages
-
 demo.userMessages.on("SayText", (e: any) => {
   demoDump.events.push(EventFactory.SayText(demo, e));
 });
@@ -121,7 +120,9 @@ demo.userMessages.on("SayText2", (e: any) => {
  * https://wiki.alliedmods.net/Counter-Strike:_Global_Offensive_Events
  *
  * Skipped
+ * - bullet_impact
  * - buytime_ended
+ * - decoy_firing
  * - item_equip
  * - player_footstep
  * - tournament_reward
@@ -139,13 +140,14 @@ demo.userMessages.on("SayText2", (e: any) => {
  * - player_given_c4
  * - inspect_weapon
  * - item_purchase
+ * - item_found
  * - inferno_extinguish
  * - player_radio
  */
 
 // Some events possibly never fired?
-demo.gameEvents.on("item_found", (e: demofile.IEventItemFound) => {
-  console.log("item_found", e);
+demo.gameEvents.on("verify_client_hit", (e: demofile.IEventVerifyClientHit) => {
+  console.log("verify_client_hit", e);
 });
 
 demo.gameEvents.on("item_purchase", (e: demofile.IEventItemPurchase) => {
@@ -155,6 +157,10 @@ demo.gameEvents.on("item_purchase", (e: demofile.IEventItemPurchase) => {
 demo.gameEvents.on("inventory_updated", (e: demofile.IEventInventoryUpdated) => {
   console.log("inventory_updated", e);
 });
+
+demo.gameEvents.on("inferno_extinguish", (e: demofile.IEventInfernoExtinguish) => {
+  console.log("inferno_extinguish", e);
+})
 
 demo.gameEvents.on("bomb_beep", (e: demofile.IEventBombBeep) => {
   console.log("bomb_beep", e);
