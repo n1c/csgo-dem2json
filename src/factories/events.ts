@@ -3,6 +3,7 @@ import * as d from "demofile";
 import { Factory } from "../factories/index";
 import * as i from "../interfaces";
 import * as events from "../interfaces/events";
+import { ICCSUsrMsg_SayText, ICCSUsrMsg_SayText2, } from "demofile/src/protobufs/cstrike15_usermessages";
 
 export class EventFactory {
 
@@ -14,17 +15,17 @@ export class EventFactory {
     };
   }
 
-  public static SayText(d: d.DemoFile, e: any): events.SayText {
+  public static SayText(d: d.DemoFile, e: ICCSUsrMsg_SayText): events.SayText {
     return {...EventFactory.Event("say_text", d), ...{
-      text: e.text,
+      text: e.text || '',
     }};
   }
 
-  public static SayText2(d: d.DemoFile, e: any): events.SayText2 {
-    return {...EventFactory.Event("say_text2", d), ...{
-      text: e.params[1],
-      username: e.params[0],
-    }};
+  public static SayText2(d: d.DemoFile, e: ICCSUsrMsg_SayText2): events.SayText2 {
+    const text = e.params ? e.params[1]: '';
+    const username = e.params ? e.params[0] : '';
+
+    return {...EventFactory.Event("say_text2", d), ...{ text, username, }};
   }
 
   public static BombBeginDefuse(d: d.DemoFile, e: d.IEventBombBegindefuse): events.BombBeginDefuse {

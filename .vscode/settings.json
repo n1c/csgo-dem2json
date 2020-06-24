@@ -14,6 +14,7 @@
         "canzoom",
         "counterterrorist",
         "csgo",
+        "cstrike",
         "defindex",
         "defuser",
         "demofile",
@@ -34,6 +35,7 @@
         "hitgroup",
         "hitgroups",
         "hltv",
+        "iccs",
         "incgrenade",
         "ineye",
         "isbot",
@@ -52,6 +54,7 @@
         "othertype",
         "poststart",
         "prestart",
+        "protobufs",
         "respawned",
         "signon",
         "smokegrenade",
@@ -63,6 +66,7 @@
         "timelimit",
         "trak",
         "unblinded",
+        "usermessages",
         "weptype",
         "xuid"
     ]

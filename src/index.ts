@@ -2,8 +2,9 @@
 // @TODO: player_avenged_teammate
 // @TODO: Player matchStats in each round end?
 
-import demofile = require("demofile");
+import * as demofile from "demofile";
 import * as fs from "fs";
+import { ICCSUsrMsg_SayText, ICCSUsrMsg_SayText2 } from "demofile/src/protobufs/cstrike15_usermessages";
 import { md5FileSync } from "./md5FileSync";
 
 import * as c from "./constants";
@@ -106,11 +107,11 @@ demo.on("tickend", () => {
 });
 
 // userMessages
-demo.userMessages.on("SayText", (e: any) => {
+demo.userMessages.on("SayText", (e: ICCSUsrMsg_SayText) => {
   demoDump.events.push(EventFactory.SayText(demo, e));
 });
 
-demo.userMessages.on("SayText2", (e: any) => {
+demo.userMessages.on("SayText2", (e: ICCSUsrMsg_SayText2) => {
   demoDump.events.push(EventFactory.SayText2(demo, e));
 });
 
