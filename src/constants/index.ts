@@ -121,7 +121,9 @@ export const GRENADE_TYPES = [
   "weapon_smokegrenade",
 ];
 
-export const HITGROUPS = {
+
+// export const ROUND_END_REASONS: { [index: number]: string } = {
+export const HITGROUPS:{ [index: number]: string } = {
   0: "Generic",
   1: "Head",
   2: "Chest",

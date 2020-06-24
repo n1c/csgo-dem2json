@@ -1,5 +1,6 @@
 
 import * as d from "demofile";
+import * as c from "../constants";
 import { Factory } from "../factories/index";
 import * as i from "../interfaces";
 import * as events from "../interfaces/events";
@@ -83,6 +84,7 @@ export class EventFactory {
     }};
   }
 
+  // @TODO: Parse the FUNFACT_REASONS to a message
   public static CSWinPanelRound(d: d.DemoFile, e: d.IEventCsWinPanelRound): events.CSWinPanelRound {
     return {...EventFactory.Event("cs_win_panel_round", d), ...{
       final_event: e.final_event,
@@ -353,7 +355,7 @@ export class EventFactory {
       dmg_armor: e.dmg_armor,
       dmg_health: e.dmg_health,
       health: e.health,
-      hitgroup: e.hitgroup,
+      hitgroup: c.HITGROUPS[e.hitgroup],
       player: playerEntity ? Factory.Player(playerEntity) : undefined,
       player_is_blind: Factory.isPlayerBlind(d, playersUnblindAt, e.userid),
       player_spotted_attacker: playerSpottedAttacker,
@@ -395,7 +397,7 @@ export class EventFactory {
       message: e.message,
       player_count: e.player_count,
       players: Factory.PlayersListFull(d),
-      reason: e.reason,
+      reason: c.ROUND_END_REASONS[e.reason],
       round: Factory.RoundNumber(d),
       winner: e.winner,
     }};
@@ -426,9 +428,9 @@ export class EventFactory {
 
   public static RoundMVP(d: d.DemoFile, e: d.IEventRoundMvp): events.RoundMVP {
     return {...EventFactory.Event("round_mvp", d), ...{
-      musickitmvps: e.userid, // @TODO: Why is this userid?
+      musickitmvps: e.musickitmvps,
       player: Factory.playerFromUserID(d, e.userid),
-      reason: e.userid,
+      reason: c.MVP_REASONS[e.reason],
       round: Factory.RoundNumber(d),
       userid: e.userid,
     }};

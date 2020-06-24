@@ -223,7 +223,7 @@ export interface PlayerHurt extends Event {
   weapon: string;
   dmg_health: number;
   dmg_armor: number;
-  hitgroup: number;
+  hitgroup: string;
   player?: i.Player;
   attacker_player?: i.Player;
   attacker_is_blind?: boolean;
@@ -256,7 +256,7 @@ export interface PlayerTeam extends Event {
 
 export interface RoundEnd extends Event {
   winner: number;
-  reason: number;
+  reason: string;
   message: string;
   player_count: number;
   players: i.PlayersListFull;
@@ -282,7 +282,7 @@ export interface RoundStart extends Event {
 
 export interface RoundMVP extends Event {
   userid: number;
-  reason: number;
+  reason: string;
   musickitmvps: number;
   player?: i.Player;
   round: number;
