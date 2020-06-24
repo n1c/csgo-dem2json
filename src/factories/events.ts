@@ -21,6 +21,7 @@ export class EventFactory {
     }};
   }
 
+  // @TODO: Add an indicator for message type? Dead/Alive etc https://github.com/saul/demofile/blob/master/src/examples/dumpfile.ts#L33
   public static SayText2(d: d.DemoFile, e: ICCSUsrMsg_SayText2): events.SayText2 {
     const text = e.params ? e.params[1]: '';
     const username = e.params ? e.params[0] : '';
@@ -205,6 +206,7 @@ export class EventFactory {
     }};
   }
 
+  // @TODO: Can we figure out _what_ was killed?
   public static OtherDeath(d: d.DemoFile, e: d.IEventOtherDeath): events.OtherDeath {
     return {...EventFactory.Event("other_death", d), ...{
       attacker: e.attacker,

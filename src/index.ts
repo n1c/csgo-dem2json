@@ -1,11 +1,11 @@
 // @TODO: Buy/Economy events?
-// @TODO: player_avenged_teammate
 // @TODO: Player matchStats in each round end?
 
 import * as demofile from "demofile";
 import * as fs from "fs";
 import { ICCSUsrMsg_SayText, ICCSUsrMsg_SayText2 } from "demofile/src/protobufs/cstrike15_usermessages";
 import { md5FileSync } from "./md5FileSync";
+import { unfiredEvents } from "./unfired_events";
 
 import * as c from "./constants";
 import { Factory } from "./factories";
@@ -119,62 +119,25 @@ demo.userMessages.on("SayText2", (e: ICCSUsrMsg_SayText2) => {
  * gameEvents
  * https://gitlab.com/ghostanalysis/csgo-demo-parser/blob/master/misc/example-events.md
  * https://wiki.alliedmods.net/Counter-Strike:_Global_Offensive_Events
- *
- * Skipped
- * - bullet_impact
- * - buytime_ended
- * - decoy_firing
- * - item_equip
- * - player_footstep
- * - tournament_reward
- * - weapon_fire_on_empty
- *
- * gameEvents don't seem to get fired
- * - break_prop
- * - break_breakable
- * - bomb_abortdefuse
- * - bomb_abortplant
- * - defuser_dropped
- * - defuser_pickup
- * - entity_killed
- * - grenade_thrown
- * - player_given_c4
- * - inspect_weapon
- * - item_purchase
- * - item_found
- * - inferno_extinguish
- * - player_radio
  */
 
 // Some events possibly never fired?
-demo.gameEvents.on("verify_client_hit", (e: demofile.IEventVerifyClientHit) => {
-  console.log("verify_client_hit", e);
-});
-
-demo.gameEvents.on("item_purchase", (e: demofile.IEventItemPurchase) => {
-  console.log("item_purchase", e);
-})
-
-demo.gameEvents.on("inventory_updated", (e: demofile.IEventInventoryUpdated) => {
-  console.log("inventory_updated", e);
-});
-
-demo.gameEvents.on("inferno_extinguish", (e: demofile.IEventInfernoExtinguish) => {
-  console.log("inferno_extinguish", e);
-})
-
-demo.gameEvents.on("bomb_beep", (e: demofile.IEventBombBeep) => {
-  console.log("bomb_beep", e);
+demo.gameEvents.on("event", (e) => {
+  if (unfiredEvents.includes(e.name)) {
+    log(e.name, e);
+  }
 });
 
 // Events that do get fired.
+
+/*
+ * @TODO:
+ * - decoy_started
+ * - decoy_detonate
+ */
+
 demo.gameEvents.on("bomb_begindefuse", (e: demofile.IEventBombBegindefuse) => {
   demoDump.events.push(EventFactory.BombBeginDefuse(demo, e));
-});
-
-demo.gameEvents.on("begin_new_match", () => {
-  demoDump.players = Factory.PlayersListShort(demo);
-  demoDump.events.push(EventFactory.Event("begin_new_match", demo));
 });
 
 demo.gameEvents.on("bomb_beginplant", (e: demofile.IEventBombBeginplant) => {
