@@ -6,6 +6,7 @@
     "cSpell.words": [
         "abortdefuse",
         "abortplant",
+        "attackerblind",
         "autoteam",
         "begindefuse",
         "beginplant",
@@ -47,6 +48,7 @@
         "networkid",
         "nightvision",
         "noreplay",
+        "noscope",
         "oldteam",
         "originalowner",
         "originalowner xuid",
@@ -62,6 +64,7 @@
         "stattrak",
         "tased",
         "teamnum",
+        "thrusmoke",
         "tickend",
         "timelimit",
         "trak",

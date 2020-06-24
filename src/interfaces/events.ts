@@ -179,6 +179,9 @@ export interface PlayerDeath extends Event {
   attacker_player?: i.Player;
   attacker_player_blind?: boolean;
   assister_player?: i.Player;
+  noscope: boolean;
+  thrusmoke: boolean;
+  attackerblind: boolean;
 }
 
 export interface PlayerDisconnect extends Event {

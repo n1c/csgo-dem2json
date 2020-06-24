@@ -274,6 +274,9 @@ export class EventFactory {
       weapon_itemid: e.weapon_itemid,
       weapon_originalowner_xuid: e.weapon_originalowner_xuid,
       // @TODO: weapon more detail?
+      noscope: e.noscope,
+      thrusmoke: e.thrusmoke,
+      attackerblind: e.attackerblind,
     }};
   }
 
