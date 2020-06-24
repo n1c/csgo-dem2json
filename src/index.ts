@@ -3,7 +3,7 @@
 
 import * as demofile from "demofile";
 import * as fs from "fs";
-import { ICCSUsrMsg_SayText, ICCSUsrMsg_SayText2 } from "demofile/src/protobufs/cstrike15_usermessages";
+import { ICCSUsrMsg_SayText, ICCSUsrMsg_SayText2, } from "demofile/src/protobufs/cstrike15_usermessages";
 import { md5FileSync } from "./md5FileSync";
 import { unfiredEvents } from "./unfired_events";
 
@@ -88,6 +88,12 @@ demo.on("end", () => {
   );
 });
 
+/*
+demo.conVars.on("change", e => {
+  log("%s: %s -> %s", e.name, e.oldValue, e.value);
+});
+*/
+
 demo.on("tickend", () => {
   if (tickFlashbangDetonate) {
     tickFlashbangDetonate.players_blind = tickPlayersBlind;
@@ -107,6 +113,12 @@ demo.on("tickend", () => {
 });
 
 // userMessages
+/*
+demo.userMessages.on("TextMsg", (e: ICCSUsrMsg_TextMsg) => {
+  log("TextMsg", e);
+});
+*/
+
 demo.userMessages.on("SayText", (e: ICCSUsrMsg_SayText) => {
   demoDump.events.push(EventFactory.SayText(demo, e));
 });
