@@ -63,6 +63,18 @@ export interface CSWinPanelRound extends Event {
   funfact_data3: number;
 }
 
+export interface DecoyStarted extends Event {
+  entityid: number;
+  player?: i.Player;
+  position: i.Position;
+}
+
+export interface DecoyDetonate extends Event {
+  entityid: number;
+  player?: i.Player;
+  position: i.Position;
+}
+
 export interface FlashbangDetonate extends Event {
   userid: number;
   entityid: number;

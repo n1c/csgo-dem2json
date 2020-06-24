@@ -97,6 +97,22 @@ export class EventFactory {
     }};
   }
 
+  public static DecoyStarted(d: d.DemoFile, e: d.IEventDecoyStarted): events.DecoyStarted {
+    return { ...EventFactory.Event("decoy_started", d), ...{
+      entityid: e.entityid,
+      player: Factory.playerFromUserID(d, e.userid),
+      position: Factory.Position(e),
+    }};
+  }
+
+  public static DecoyDetonate(d: d.DemoFile, e: d.IEventDecoyDetonate): events.DecoyDetonate {
+    return { ...EventFactory.Event("decoy_detonate", d), ...{
+      entityid: e.entityid,
+      player: Factory.playerFromUserID(d, e.userid),
+      position: Factory.Position(e),
+    }};
+  }
+
   public static FlashbangDetonate(
     d: d.DemoFile,
     e: d.IEventFlashbangDetonate,

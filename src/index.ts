@@ -142,12 +142,6 @@ demo.gameEvents.on("event", (e) => {
 
 // Events that do get fired.
 
-/*
- * @TODO:
- * - decoy_started
- * - decoy_detonate
- */
-
 demo.gameEvents.on("bomb_begindefuse", (e: demofile.IEventBombBegindefuse) => {
   demoDump.events.push(EventFactory.BombBeginDefuse(demo, e));
 });
@@ -174,6 +168,14 @@ demo.gameEvents.on("bomb_pickup", (e: demofile.IEventBombPickup) => {
 
 demo.gameEvents.on("bomb_planted", (e: demofile.IEventBombPlanted) => {
   demoDump.events.push(EventFactory.BombPlanted(demo, e));
+});
+
+demo.gameEvents.on("decoy_started", (e: demofile.IEventDecoyStarted) => {
+  demoDump.events.push(EventFactory.DecoyStarted(demo, e));
+});
+
+demo.gameEvents.on("decoy_detonate", (e: demofile.IEventDecoyDetonate) => {
+  demoDump.events.push(EventFactory.DecoyDetonate(demo, e));
 });
 
 demo.gameEvents.on("round_announce_match_start", () => {
