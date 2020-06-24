@@ -305,7 +305,7 @@ export class EventFactory {
     e: d.IEventPlayerHurt,
     playersUnblindAt: { [userid: number]: number }
   ): events.PlayerHurt {
-    let attackerPlayer;
+    let attackerPlayer = undefined;
     let attackerSpottedPlayer = false;
     let playerSpottedAttacker = false;
     let attackerIsBlind = false;
@@ -314,12 +314,13 @@ export class EventFactory {
     if (e.attacker && e.attacker > 0) {
       const attackerEntity = d.entities.getByUserId(e.attacker);
 
-      playerSpottedAttacker = !!(playerEntity && playerEntity.hasSpotted(attackerEntity));
-      attackerSpottedPlayer = !!(attackerEntity && attackerEntity.hasSpotted(playerEntity));
+      if (attackerEntity && playerEntity) {
+        playerSpottedAttacker = playerEntity.hasSpotted(attackerEntity);
+        attackerSpottedPlayer = attackerEntity.hasSpotted(playerEntity);
 
-      attackerPlayer = attackerEntity ? Factory.Player(attackerEntity) : undefined;
-
-      attackerIsBlind = Factory.isPlayerBlind(d, playersUnblindAt, e.attacker);
+        attackerPlayer = attackerEntity ? Factory.Player(attackerEntity) : undefined;
+        attackerIsBlind = Factory.isPlayerBlind(d, playersUnblindAt, e.attacker);
+      }
     }
 
     return {...EventFactory.Event("player_hurt", d), ...{
